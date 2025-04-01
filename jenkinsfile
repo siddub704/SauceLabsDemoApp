@@ -1,27 +1,22 @@
 pipeline {
     agent any
 
-    environment {
-        GIT_URL = 'https://github.com/siddub704/SauceLabsDemoApp.git'
-    }
-
     stages {
-       
+        stage('Build') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
 
-        stage('Build and Test') {
+        stage('Test') {
             steps {
                 sh 'mvn clean test'
             }
         }
-
-        stage('Publish Cucumber Report') {
+       
+        stage('Compile') {
             steps {
-                publishHTML(target: [
-                    reportName: 'Cucumber Test Report',
-                    reportDir: 'target',
-                    reportFiles: 'cucumber-reports.html',
-                    keepAll: true
-                ])
+                sh 'mvn compile'
             }
         }
     }
