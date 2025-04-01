@@ -6,11 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: "${GIT_URL}"
-            }
-        }
+       
 
         stage('Build and Test') {
             steps {
